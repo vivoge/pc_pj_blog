@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/reg',function(req,res){
- res.render('../views/user/reg')
+ res.render('../views/user/reg',{title:'reg'})
 });
 
 router.post('/reg',function(req,res){
