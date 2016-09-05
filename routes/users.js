@@ -10,10 +10,11 @@ router.get('/reg',function(req,res){
 router.post('/reg',function(req,res){
   var user=req.body;
     userModel.create(user,function(err,doc){
-        if(err){
-            res.redirect('back');
-        }else{
+        if(doc){
+            req.session.user=doc;
             res.redirect('/');
+        }else{
+            res.redirect('back');
         }
     })
 

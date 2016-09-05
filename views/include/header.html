@@ -5,7 +5,7 @@
     <script src="/lib/js/jquery.js"></script>
     <script src="/lib/js/bootstrap.js"></script>
 
-    <link rel='stylesheet' href='../../public/lib/css/bootstrap.css' />
+    <!--<link rel='stylesheet' href='../../public/lib/css/bootstrap.css' />-->
     <link rel='stylesheet' href='/lib/css/bootstrap.css' />
 
 </head>
@@ -29,10 +29,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/users/reg">注册</a></li>
-                <li><a href="/users/login">登录</a></li>
+                <%
+                  if(user){%>
                 <li><a href="/articles/add">发表文章</a></li>
                 <li><a href="/users/logout">退出</a></li>
+
+
+                <%
+                }else{%>
+                <li class="active"><a href="/users/reg">注册</a></li>
+                <li><a href="/users/login">登录</a></li>
+                <%
+                }
+                %>
+
+
 
             </ul>
 
