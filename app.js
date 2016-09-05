@@ -5,12 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/sange_blog');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
 
 var session = require('express-session');
-var MongoStore = require('connect-mongo/es5')(session);
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
@@ -28,12 +31,9 @@ app.use(cookieParser());
 app.use(session({
   secret:'sange',
   resave:true,
-  saveUninitialized:true/*,
-  store:new MongoStore({
-    db:'sange_blog',
-    host:'127.0.0.1',
-    port:27017
-  })*/
+  saveUninitialized:true,
+  store:new MongoStore({mongooseConnection: mongoose.connection
+  })
 
 }));
 app.use(function(req,res,next){
