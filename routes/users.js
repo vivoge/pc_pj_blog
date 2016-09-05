@@ -8,8 +8,7 @@ router.get('/reg',function(req,res){
 });
 
 router.post('/reg',function(req,res){
-  var user=req.body;
-    userModel.create(user,function(err,doc){
+    userModel.create(req.body,function(err,doc){
         if(doc){
             req.session.user=doc;
             res.redirect('/');
@@ -17,7 +16,6 @@ router.post('/reg',function(req,res){
             res.redirect('back');
         }
     })
-
 });
 
 router.get('/login',function(req,res){
@@ -29,7 +27,8 @@ router.post('/login',function(req,res){
 });
 
 router.get('/logout',function(req,res){
-  res.render('../views/user/logout');
+    req.session.user=null;
+    res.redirect('/');
 });
 
 
