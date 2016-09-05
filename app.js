@@ -10,7 +10,7 @@ var users = require('./routes/users');
 var articles = require('./routes/articles');
 
 var session = require('express-session');
-var connectMongo = require('connect-mongo');
+var MongoStore = require('connect-mongo/es5')(session);
 
 var app = express();
 
@@ -28,7 +28,12 @@ app.use(cookieParser());
 app.use(session({
   secret:'sange',
   resave:true,
-  saveUninitialized:true
+  saveUninitialized:true,
+  store:new MongoStore({
+    db:'sange_blog',
+    host:'127.0.0.1',
+    port:27017
+  })
 
 }));
 app.use(function(req,res,next){
