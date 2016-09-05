@@ -1,4 +1,6 @@
 var express = require('express');
+var userModel = require('../model/user.js');
+
 var router = express.Router();
 
 router.get('/reg',function(req,res){
@@ -6,7 +8,15 @@ router.get('/reg',function(req,res){
 });
 
 router.post('/reg',function(req,res){
-  res.send('reg');
+  var user=req.body;
+    userModel.create(user,function(err,doc){
+        if(err){
+            res.redirect('back');
+        }else{
+            res.redirect('/');
+        }
+    })
+
 });
 
 router.get('/login',function(req,res){
