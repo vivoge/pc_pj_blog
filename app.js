@@ -2,19 +2,17 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/sange_blog');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
-
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-
+var flash = require('connect-flash');
 var app = express();
 
 // view engine setup
@@ -36,15 +34,16 @@ app.use(session({
   })
 
 }));
+app.use(flash());
 app.use(function(req,res,next){
   res.locals.user = req.session.user;
+  res.locals.success = req.flash('success').toString();
+  res.locals.error = req.flash('error').toString();
   next();
 });
-
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
+/*路由*/
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles',articles);
