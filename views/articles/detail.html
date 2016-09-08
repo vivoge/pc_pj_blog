@@ -1,0 +1,15 @@
+<%- include ../include/header.html%>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <%=docs.title%>
+    </div>
+    <div class="panel-footer"><%=docs.content%></div>
+</div>
+
+<div class="panel-footer">
+    <a class="btn btn-warning" href="/articles/update/<%=docs._id%>">修改</a>
+    <a class="btn btn-warning" href="/articles/delete/<%=docs._id%>">删除</a>
+</div>
+
+<%- include ../include/footer.html%>

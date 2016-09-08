@@ -15,9 +15,9 @@
                 <img src="<%=article.user.avatar%>" alt="<%=article.user.username%>">
             </a>
             <div class="media-body">
-                <h4 class="media-heading"><%=article.title%></h4>
+                <h4 class="media-heading"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></h4>
                 <p><%-article.content%></p>
-                <img src="<%=article.img%>" style="width: 120px;height: 80px;" alt="<%=article.user.username%>"/>
+                <img src="<%=article.img%>" style="width: 100px;height: 80px;" alt="<%=article.user.username%>"/>
             </div>
         </li>
 
